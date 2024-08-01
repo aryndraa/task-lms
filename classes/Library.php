@@ -2,22 +2,12 @@
 
 class Library 
 {
-
-    private $books = [];
+    public $books = [];
     private $members = [];
     private $librarians = [];
     private $memberNotifications = [];
     private $librarianNotifications = [];
     private array $notifications = [];
-    
-    public function __construct()
-    {
-    }
-
-    public function addBook(Book $book) 
-    {
-        $this->books[$book->getBookInfo()['isbn']] = $book;
-    }
 
     public function removeBook(Book $book) 
     {
@@ -27,13 +17,14 @@ class Library
             return true;
         } 
 
-        $this->notify(new Notification(
-            "Book {$book->getBookTitle()} was removed", 'LIBRARIAN'
-        ));
-        
-        return false;
-        
+        return false;   
     }
+
+    public function addBook(Book $book) 
+    {
+        $this->books[$book->getBookInfo()['isbn']] = $book;
+    }
+
 
     public function registerMember(Member $member) 
     {
@@ -51,9 +42,10 @@ class Library
     {
         if (isset($this->books[$isbn])) {
             return $this->books[$isbn];
-        } else {
-            throw new Exception("Book not found.");
-        }
+        } 
+
+        throw new Exception("Book not found.");
+        
     }
 
     public function listAvailableBooks() 

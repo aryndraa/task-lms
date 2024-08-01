@@ -2,7 +2,6 @@
 
 require_once "Person.php";
 
-
 class Librarian extends Person 
 { 
     private $employeId;
@@ -14,41 +13,38 @@ class Librarian extends Person
         $this->employeId = $employeId;
     }
 
+    public function removeBook(&$library, Book $book) 
+    {
+        if($library->removeBook($book)) {
+            $this->notify(new Notification(
+                "Book <b class='text-base'>{$book->getBookTitle()}</b> removed by {$this->name}", 'LIBRARIAN'
+            ));
+        } else {
+            $this->notify(new Notification(
+                "Book <b class='text-base'>{$book->getBookTitle()}</b> was removed", 'LIBRARIAN'
+            ));
+        }     
+    }
+
     public function addBook(&$library, Book $book) 
     {
-        $library -> addBook($book);
+        $library->addBook($book);
         $this->notify(new Notification(
             "Book <b class='text-base'>{$book -> getBookTitle()}</b> added by {$this->name}", 'LIBRARIAN'
         ));
     }
 
-    public function removeBook(&$library, Book $book) 
-    {
-        if($library -> removeBook($book)) {
-            $this->notify(new Notification(
-                "Book <b class='text-base'>{$book -> getBookTitle()}</b> removed by {$this->name}", 'LIBRARIAN'
-            ));
-
-            $this->notify(new Notification(
-                "Book <b class='text-base'>{$book -> getBookTitle()}</b> was removed", 'LIBRARIAN'
-            ));
-        };
-
-     
-    }
 
     public function getLibrarianInfo() 
     {
-
         return [
-            'name' => $this->getName(),
+            'name'      => $this->getName(),
             'employeID' => $this->employeId,
         ];
     }
 
     public function getLibrarianID()
     {
-
         return $this->employeId;
     }
 

@@ -1,6 +1,7 @@
 <?php 
 
-class Person {
+class Person
+{
     protected $name;
     
     public function __construct($name) 
@@ -12,6 +13,4 @@ class Person {
     {
         return $this->name;
     }
-
-    
 }

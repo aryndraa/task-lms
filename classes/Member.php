@@ -9,27 +9,31 @@ class Member extends Person
     private string $memberID;
     private array $borrowedBooks = [];
     private  array $notifications = [];
-    public  int $setWarning = 0;
 
     public function __construct(string $name, string $memberID)
     {
         parent::__construct($name);
         $this -> memberID = $memberID;
 
-        // $this -> setNotification("member named {$name} with ID {$memberID} successfully added");
     }
 
-    public function borrowBook(Book $book) 
+    public function borrowBook(&$library, Book $book) 
     {
-        if($book->borrowBook()) {
-            $this -> borrowedBooks[] = $book;
+        if(array_search($book, $library->books)) {
+            if($book->borrowBook()) {
+                $this -> borrowedBooks[] = $book;
+                $this -> notify(New Notification(
+                    "Book <b class='text-base'>{$book -> getBookTitle()}</b> borrowed by {$this->name}", "MEMBER"
+                ));
+
+                return true;
+            }
+
             $this -> notify(New Notification(
-                "Book <b class='text-base'>{$book -> getBookTitle()}</b> borrowed by {$this->name}", "MEMBER"
+                "Book <b class='text-base'>{$book -> getBookTitle()}</b> Doesnt borrowed by {$this->name}, copy not available", "MEMBER"
             ));
-
-            return true;
         }
-
+        
         $this -> notify(New Notification(
             "Book <b class='text-base'>{$book -> getBookTitle()}</b> Doesnt borrowed by {$this->name}, copy not available", "MEMBER"
         ));
@@ -39,7 +43,7 @@ class Member extends Person
     {
         $indexBook = array_search($book, $this->borrowedBooks);
 
-        if($indexBook !== false) {
+        if($indexBook) {
             unset($this->borrowedBooks[$indexBook]);
 
             if($book->returnBook()) {
@@ -63,7 +67,6 @@ class Member extends Person
 
     public function getMemberInfo() 
     {
-
         return [
             'name' => $this->name,
             'memberID' => $this->memberID,
@@ -78,13 +81,11 @@ class Member extends Person
 
     public function getNotifications() 
     {
-        
         return $this->notifications;
     }
 
     public function getMemberID()
     {
-
         return $this->memberID;
     }
 
