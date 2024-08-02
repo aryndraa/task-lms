@@ -2,7 +2,7 @@
 
 class Person
 {
-    protected $name;
+    protected string $name;
     
     public function __construct($name) 
     {
