@@ -4,7 +4,7 @@ require_once "Person.php";
 
 class Librarian extends Person 
 { 
-    private $employeId;
+    private string $employeId;
     private array $notifications = [];
 
     public function __construct(string $name, string $employeId)
@@ -17,11 +17,13 @@ class Librarian extends Person
     {
         if($library->removeBook($book)) {
             $this->notify(new Notification(
-                "Book <b class='text-base'>{$book->getBookTitle()}</b> removed by {$this->name}", 'LIBRARIAN'
+                "Book <b class='text-base'>{$book->getBookTitle()}</b> 
+                removed by {$this->name}", 'LIBRARIAN'
             ));
         } else {
             $this->notify(new Notification(
-                "Book <b class='text-base'>{$book->getBookTitle()}</b> was removed", 'LIBRARIAN'
+                "Book <b class='text-base'>{$book->getBookTitle()}</b> 
+                was removed", 'LIBRARIAN'
             ));
         }     
     }
@@ -33,7 +35,6 @@ class Librarian extends Person
             "Book <b class='text-base'>{$book -> getBookTitle()}</b> added by {$this->name}", 'LIBRARIAN'
         ));
     }
-
 
     public function getLibrarianInfo() 
     {
@@ -57,5 +58,4 @@ class Librarian extends Person
     {
         return $this->notifications;
     }
-
 }
