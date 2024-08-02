@@ -9,11 +9,46 @@ require_once "classes/Member.php";
 $library = new Library();
 
 // Book init
-$book1 = new Book("How To Be Juragan Iwak ", "Mr. Bassing Iskandar", "001", 2015, 2);
-$book2 = new Book("Misteri Paku Tanah Jawa", "Edy Mesin Kasir", "002", 2024, 2);
-$book3 = new Book("Alam Bawah Gaib", "Arya Negromanser", "003", 2008, 2);
-$book4 = new Book("Teknik Lompat Jauh", "Devano Sigit Rendang", "004", 2021, 2);
-$book5 = new Book("Ahli Masak 24 jam", "Restu Cigago", "005", 2010, 2);
+$book1 = new Book(
+    "How To Be Juragan Iwak ", 
+    "Mr. Bassing Iskandar", 
+    "001", 
+    2015, 
+    2
+);
+
+$book2 = new Book(
+    "Misteri Paku Tanah Jawa", 
+    "Edy Mesin Kasir", 
+    "002", 
+    2024, 
+    2
+);
+
+$book3 = new Book(
+    "Alam Bawah Gaib", 
+    "Arya Negromanser", 
+    "003", 
+    2008, 
+    2
+
+);
+
+$book4 = new Book(
+    "Teknik Lompat Jauh", 
+    "Devano Sigit Rendang", 
+    "004", 
+    2021, 
+    2
+);
+
+$book5 = new Book(
+    "Ahli Masak 24 jam", 
+    "Restu Cigago", 
+    "005", 
+    2010, 
+    2
+);
 
 // Librarian init
 $librarian1 = new Librarian("Cik Sucana", "L001");
