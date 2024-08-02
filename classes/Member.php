@@ -5,7 +5,6 @@ require_once "Notification.php";
 
 class Member extends Person
 {
-
     private string $memberID;
     private array $borrowedBooks = [];
     private  array $notifications = [];
@@ -14,7 +13,6 @@ class Member extends Person
     {
         parent::__construct($name);
         $this -> memberID = $memberID;
-
     }
 
     public function borrowBook(&$library, Book $book) 
@@ -23,19 +21,22 @@ class Member extends Person
             if($book->borrowBook()) {
                 $this -> borrowedBooks[] = $book;
                 $this -> notify(New Notification(
-                    "Book <b class='text-base'>{$book -> getBookTitle()}</b> borrowed by {$this->name}", "MEMBER"
+                    "Book <b class='text-base'>{$book -> getBookTitle()}</b> 
+                     borrowed by {$this->name}", "MEMBER"
                 ));
 
                 return true;
             }
 
             $this -> notify(New Notification(
-                "Book <b class='text-base'>{$book -> getBookTitle()}</b> Doesnt borrowed by {$this->name}, copy not available", "MEMBER"
+                "Book <b class='text-base'>{$book -> getBookTitle()}</b> Doesnt borrowed by {$this->name}, 
+                 copy not available", "MEMBER"
             ));
         }
         
         $this -> notify(New Notification(
-            "Book <b class='text-base'>{$book -> getBookTitle()}</b> Doesnt borrowed by {$this->name}, copy not available", "MEMBER"
+            "Book <b class='text-base'>{$book -> getBookTitle()}</b> Doesnt borrowed by {$this->name}, 
+             copy not available", "MEMBER"
         ));
     }
 
@@ -58,7 +59,8 @@ class Member extends Person
         }
 
         $this -> notify(new Notification(
-            "Book <b class='text-base'>{$book -> getBookTitle()}</b> wasnt borrowed by {$this->name}", 'MEMBER'
+            "Book <b class='text-base'>{$book -> getBookTitle()}</b> 
+             wasnt borrowed by {$this->name}", 'MEMBER'
         ));
 
         return false;
@@ -88,5 +90,4 @@ class Member extends Person
     {
         return $this->memberID;
     }
-
 }
